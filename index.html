@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Facts</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        header {
+            background-color: rgba(255, 126, 95, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .fact-card {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            margin: 20px;
+            padding: 25px;
+            width: 400px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .fact-card:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .randomize-button {
+            padding: 15px 30px;
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+        }
+        .randomize-button:hover {
+            background-color: #e76b4b;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Facts About Mars
+    </header>
+    <div class="fact-card" id="fact-card">
+        <!-- A single fact will be displayed here -->
+    </div>
+    <button class="randomize-button" onclick="displayRandomFact()">Show Random Fact</button>
+    <script>
+        const marsFacts = [
+            "Mars is the fourth planet from the Sun in our solar system.",
+            "Mars is often referred to as the 'Red Planet' due to its reddish appearance.",
+            "Mars has the largest volcano in the solar system, Olympus Mons, which is about 13.6 miles (22 kilometers) high.",
+            "The atmosphere of Mars is mostly carbon dioxide, with traces of nitrogen and argon.",
+            "Mars has two small moons, Phobos and Deimos.",
+            "A day on Mars, known as a sol, is approximately 24.6 hours long.",
+            "Mars has the largest dust storms in the solar system, which can last for months and cover the entire planet.",
+            "Mars has a canyon system called Valles Marineris that is over 2,500 miles (4,000 kilometers) long.",
+            "Mars' surface temperature can range from -195 degrees Fahrenheit (-125 degrees Celsius) in winter to 70 degrees Fahrenheit (20 degrees Celsius) in summer.",
+            "Mars has been explored by several spacecraft, including rovers like Curiosity and Perseverance."
+        ];
 
+        let currentFactIndex = -1;
+
+        function displayRandomFact() {
+            if (currentFactIndex === -1 || currentFactIndex >= marsFacts.length - 1) {
+                shuffleFacts(marsFacts);
+                currentFactIndex = 0;
+            } else {
+                currentFactIndex++;
+            }
+            const factCard = document.getElementById('fact-card');
+            factCard.textContent = marsFacts[currentFactIndex];
+        }
+
+        function shuffleFacts(facts) {
+            for (let i = facts.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [facts[i], facts[j]] = [facts[j], facts[i]];
+            }
+        }
+
+        // Initial display of a random fact
+        displayRandomFact();
+    </script>
+</body>
+</html>
